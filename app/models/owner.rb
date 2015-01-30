@@ -1,5 +1,5 @@
 class Owner < ActiveRecord::Base
-  has_many :repos, dependent: :destroy
+  has_many :repos
 
   def self.upsert(github_id:, github_name:)
     owner = find_or_initialize_by(github_id: github_id)

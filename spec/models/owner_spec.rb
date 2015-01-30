@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Owner do
-  it { should have_many(:repos).dependent(:destroy) }
+  it { should have_many(:repos) }
 
   describe ".upsert" do
     context "when owner does not exist" do
