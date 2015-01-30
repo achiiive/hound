@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  sequence(:github_id) { |n| n }
+  sequence(:github_id)
   sequence(:github_name) { |n| "github#{n}" }
 
   factory :build do
@@ -32,7 +32,7 @@ FactoryGirl.define do
   end
 
   factory :user do
-    github_username { |n| "github#{n}" }
+    github_username { generate(:github_name) }
 
     ignore do
       repos []
