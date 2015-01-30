@@ -8,9 +8,9 @@ describe RepoSynchronization do
         id: 456,
         private: true,
         owner: {
-          type: "User",
           id: 1,
-          login: "thoughtbot"
+          login: "thoughtbot",
+          type: "User",
         }
       }
       stub_github_api_repos(attributes)
@@ -28,9 +28,9 @@ describe RepoSynchronization do
         id: 456,
         private: false,
         owner: {
-          type: "Organization",
           id: 1,
-          login: "thoughtbot"
+          login: "thoughtbot",
+          type: "Organization",
         }
       }
       stub_github_api_repos(attributes)
@@ -48,9 +48,9 @@ describe RepoSynchronization do
         id: 456,
         private: false,
         owner: {
-          type: "User",
           id: 1,
-          login: "thoughtbot"
+          login: "thoughtbot",
+          type: "User",
         }
       }
       stub_github_api_repos(attributes)
@@ -73,9 +73,9 @@ describe RepoSynchronization do
         id: membership.repo.github_id,
         private: true,
         owner: {
-          type: "User",
           id: 1,
-          login: "thoughtbot"
+          login: "thoughtbot",
+          type: "User",
         }
       }
       stub_github_api_repos(attributes)
@@ -97,9 +97,9 @@ describe RepoSynchronization do
           id: repo.github_id,
           private: true,
           owner: {
-            type: "User",
             id: 1,
-            login: "thoughtbot"
+            login: "thoughtbot",
+            type: "User",
           }
         }
         stub_github_api_repos(attributes)
@@ -124,9 +124,9 @@ describe RepoSynchronization do
             id: repo_github_id,
             private: true,
             owner: {
-              type: "Organization",
               id: owner_github_id,
-              login: owner_name
+              login: owner_name,
+              type: "Organization",
             }
           }
           stub_github_api_repos(attributes)
@@ -150,9 +150,9 @@ describe RepoSynchronization do
             id: repo_github_id,
             private: true,
             owner: {
-              type: "Organization",
               id: owner.github_id,
-              login: owner.github_name
+              login: owner.github_name,
+              type: "Organization",
             }
           }
           stub_github_api_repos(attributes)
