@@ -1,6 +1,4 @@
 class RepoSynchronization
-  ORGANIZATION_TYPE = 'Organization'
-
   pattr_initialize :user, :github_token
   attr_reader :user
 
@@ -24,7 +22,7 @@ class RepoSynchronization
       private: attributes[:private],
       github_id: attributes[:id],
       full_github_name: attributes[:full_name],
-      in_organization: attributes[:owner][:type] == ORGANIZATION_TYPE,
+      in_organization: attributes[:owner][:type] == GithubApi::ORGANIZATION_TYPE,
       owner: upsert_owner(attributes[:owner]),
     }
   end
@@ -32,7 +30,8 @@ class RepoSynchronization
   def upsert_owner(owner_attributes)
     Owner.upsert(
       github_id: owner_attributes[:id],
-      github_login: owner_attributes[:login]
+      github_login: owner_attributes[:login],
+      organization: owner_attributes[:type] == GithubApi::ORGANIZATION_TYPE
     )
   end
 end

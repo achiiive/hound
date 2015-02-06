@@ -15,7 +15,8 @@ describe Buildable do
       payload = double(
         "Payload",
         repository_owner_id: 1,
-        repository_owner_name: "test"
+        repository_owner_name: "test",
+        repository_owner_is_organization?: true
       )
       allow(Payload).to receive(:new).and_return(payload)
       allow(BuildRunner).to receive(:new).and_return(build_runner)
@@ -50,8 +51,11 @@ describe Buildable do
 
       TestJob.perform(payload_data)
 
-      expect(Owner).to have_received(:upsert).
-        with(github_id: github_id, github_login: github_login)
+      expect(Owner).to have_received(:upsert).with(
+        github_id: github_id,
+        github_login: github_login,
+        organization: true
+      )
     end
   end
 
@@ -60,7 +64,8 @@ describe Buildable do
       "repository" => {
         "owner" => {
           "id" => github_id,
-          "login" => github_login
+          "login" => github_login,
+          "type" => "Organization"
         }
       }
     }

@@ -73,5 +73,6 @@ FactoryGirl.define do
   factory :owner do
     github_id
     github_login
+    organization false
   end
 end
