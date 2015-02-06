@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20150130051749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "builds", force: :cascade do |t|
     t.text     "violations_archive"
@@ -41,14 +40,15 @@ ActiveRecord::Schema.define(version: 20150130051749) do
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "owners", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "github_id",   null: false
-    t.string   "github_name", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "github_id",                    null: false
+    t.string   "github_login",                 null: false
+    t.boolean  "organization", default: false, null: false
   end
 
   add_index "owners", ["github_id"], name: "index_owners_on_github_id", unique: true, using: :btree
-  add_index "owners", ["github_name"], name: "index_owners_on_github_name", unique: true, using: :btree
+  add_index "owners", ["github_login"], name: "index_owners_on_github_login", unique: true, using: :btree
 
   create_table "repos", force: :cascade do |t|
     t.integer  "github_id",                                    null: false

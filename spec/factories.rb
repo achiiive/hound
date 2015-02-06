@@ -1,6 +1,7 @@
 FactoryGirl.define do
   sequence(:github_id)
   sequence(:github_name) { |n| "github#{n}" }
+  sequence(:github_login) { |n| "github_login#{n}" }
 
   factory :build do
     repo
@@ -71,6 +72,6 @@ FactoryGirl.define do
 
   factory :owner do
     github_id
-    github_name
+    github_login
   end
 end

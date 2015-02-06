@@ -39,10 +39,10 @@ describe Buildable do
 
     it "upserts repository owner" do
       github_id = "2345"
-      github_name = "thoughtbot"
+      github_login = "thoughtbot"
       payload_data = payload_data(
         github_id: github_id,
-        github_name: github_name
+        github_login: github_login
       )
       build_runner = double("BuildRunner", run: true)
       allow(BuildRunner).to receive(:new).and_return(build_runner)
@@ -51,16 +51,16 @@ describe Buildable do
       TestJob.perform(payload_data)
 
       expect(Owner).to have_received(:upsert).
-        with(github_id: github_id, github_name: github_name)
+        with(github_id: github_id, github_login: github_login)
     end
   end
 
-  def payload_data(github_id: 1234, github_name: "test")
+  def payload_data(github_id: 1234, github_login: "test")
     {
       "repository" => {
         "owner" => {
           "id" => github_id,
-          "login" => github_name
+          "login" => github_login
         }
       }
     }

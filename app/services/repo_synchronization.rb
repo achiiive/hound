@@ -32,7 +32,7 @@ class RepoSynchronization
   def upsert_owner(owner_attributes)
     Owner.upsert(
       github_id: owner_attributes[:id],
-      github_name: owner_attributes[:login]
+      github_login: owner_attributes[:login]
     )
   end
 end

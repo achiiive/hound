@@ -6,7 +6,7 @@ describe RepoSynchronization do
       stub_github_api_repos(
         repo_id: 456,
         owner_id: 1,
-        owner_name: "thoughtbot",
+        owner_login: "thoughtbot",
         repo_name: "user/newrepo"
       )
       user = create(:user)
@@ -21,7 +21,7 @@ describe RepoSynchronization do
       stub_github_api_repos(
         repo_id: 456,
         owner_id: 1,
-        owner_name: "thoughtbot",
+        owner_login: "thoughtbot",
         private_repo: false,
         repo_name: "user/newrepo"
       )
@@ -37,7 +37,7 @@ describe RepoSynchronization do
       stub_github_api_repos(
         repo_id: 456,
         owner_id: 1,
-        owner_name: "thoughtbot",
+        owner_login: "thoughtbot",
         private_repo: false,
         repo_name: "user/newrepo"
       )
@@ -58,7 +58,7 @@ describe RepoSynchronization do
       stub_github_api_repos(
         repo_id: membership.repo.github_id,
         owner_id: 1,
-        owner_name: "thoughtbot",
+        owner_login: "thoughtbot",
         repo_name: repo_name
       )
       synchronization = RepoSynchronization.new(membership.user, "githubtoken")
@@ -77,7 +77,7 @@ describe RepoSynchronization do
         stub_github_api_repos(
           repo_id: repo.github_id,
           owner_id: 1,
-          owner_name: "thoughtbot"
+          owner_login: "thoughtbot"
         )
         second_user = create(:user)
         synchronization = RepoSynchronization.new(second_user, "githubtoken")
@@ -93,19 +93,19 @@ describe RepoSynchronization do
         it "creates and associates an owner to the repo" do
           user = create(:user)
           owner_github_id = 1234
-          owner_name = "thoughtbot"
+          owner_login = "thoughtbot"
           repo_github_id = 321
           stub_github_api_repos(
             repo_id: repo_github_id,
             owner_id: owner_github_id,
-            owner_name: owner_name
+            owner_login: owner_login
           )
           synchronization = RepoSynchronization.new(user, "githubtoken")
 
           synchronization.start
 
           owner = Owner.find_by(github_id: owner_github_id)
-          expect(owner.github_name).to eq(owner_name)
+          expect(owner.github_login).to eq(owner_login)
           expect(owner.repos.map(&:github_id)).to include(repo_github_id)
         end
       end
@@ -118,7 +118,7 @@ describe RepoSynchronization do
           stub_github_api_repos(
             repo_id: repo_github_id,
             owner_id: owner.github_id,
-            owner_name: owner.github_name
+            owner_login: owner.github_login
           )
           synchronization = RepoSynchronization.new(user, "githubtoken")
 
@@ -133,7 +133,7 @@ describe RepoSynchronization do
     def stub_github_api_repos(
       repo_id:,
       owner_id:,
-      owner_name:,
+      owner_login:,
       private_repo: true,
       repo_name: "thoughtbot/newrepo"
     )
@@ -143,7 +143,7 @@ describe RepoSynchronization do
         private: private_repo,
         owner: {
           id: owner_id,
-          login: owner_name,
+          login: owner_login,
           type: "Organization",
         }
       }
