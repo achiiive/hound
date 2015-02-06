@@ -130,7 +130,13 @@ describe RepoSynchronization do
       end
     end
 
-    def stub_github_api_repos(repo_id:, owner_id:, owner_name:, private_repo: true, repo_name: "thoughtbot/newrepo")
+    def stub_github_api_repos(
+      repo_id:,
+      owner_id:,
+      owner_name:,
+      private_repo: true,
+      repo_name: "thoughtbot/newrepo"
+    )
       attributes = {
         full_name: repo_name,
         id: repo_id,
