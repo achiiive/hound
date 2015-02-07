@@ -28,21 +28,30 @@ class Analytics
     )
   end
 
-  def track_reviewed(repo)
-    track(
-      event: "Reviewed Repo",
-      properties: {
-        name: repo.full_github_name
-      }
-    )
-  end
-
   def track_subscribed(repo)
     track(
       event: "Subscribed Private Repo",
       properties: {
         name: repo.full_github_name,
         revenue: repo.plan_price
+      }
+    )
+  end
+
+  def track_build_started(repo)
+    track(
+      event: "Build Started",
+      properties: {
+        name: repo.full_github_name
+      }
+    )
+  end
+
+  def track_build_completed(repo)
+    track(
+      event: "Build Completed",
+      properties: {
+        name: repo.full_github_name
       }
     )
   end
