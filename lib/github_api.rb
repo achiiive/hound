@@ -6,7 +6,6 @@ class GithubApi
   ORGANIZATION_TYPE = "Organization"
   PREVIEW_MEDIA_TYPE = "application/vnd.github.moondragon-preview+json"
   SERVICES_TEAM_NAME = "Services"
-  USER_TYPE = "User"
 
   def initialize(token = ENV["HOUND_GITHUB_TOKEN"])
     @token = token

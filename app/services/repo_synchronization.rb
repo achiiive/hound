@@ -18,12 +18,14 @@ class RepoSynchronization
   end
 
   def repo_attributes(attributes)
+    owner = upsert_owner(attributes[:owner])
+
     {
       private: attributes[:private],
       github_id: attributes[:id],
       full_github_name: attributes[:full_name],
       in_organization: attributes[:owner][:type] == GithubApi::ORGANIZATION_TYPE,
-      owner: upsert_owner(attributes[:owner]),
+      owner: owner,
     }
   end
 
