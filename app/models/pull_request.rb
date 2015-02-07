@@ -22,7 +22,7 @@ class PullRequest
   end
 
   def repository_owner
-    payload.repository_owner_name
+    payload.repository_owner_login
   end
 
   def opened?

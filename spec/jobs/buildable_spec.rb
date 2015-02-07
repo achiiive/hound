@@ -15,7 +15,7 @@ describe Buildable do
       payload = double(
         "Payload",
         repository_owner_id: 1,
-        repository_owner_name: "test",
+        repository_owner_login: "test",
         repository_owner_is_organization?: true
       )
       allow(Payload).to receive(:new).and_return(payload)

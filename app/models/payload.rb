@@ -40,7 +40,7 @@ class Payload
     repository["owner"]["id"]
   end
 
-  def repository_owner_name
+  def repository_owner_login
     repository["owner"]["login"]
   end
 
