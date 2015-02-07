@@ -89,7 +89,7 @@ describe RepoSynchronization do
     end
 
     describe "repo owners" do
-      context "when the owner doesn't exit" do
+      context "when the owner doesn't exist" do
         it "creates and associates an owner to the repo" do
           user = create(:user)
           owner_github_id = 1234
@@ -106,7 +106,7 @@ describe RepoSynchronization do
 
           owner = Owner.find_by(github_id: owner_github_id)
           expect(owner.github_login).to eq(owner_login)
-          expect(owner.repos.map(&:github_id)).to include(repo_github_id)
+          expect(owner.repos.map(&:github_id)).to eq([repo_github_id])
         end
       end
 
@@ -125,7 +125,7 @@ describe RepoSynchronization do
           synchronization.start
 
           owner = Owner.find_by(github_id: owner.github_id)
-          expect(owner.repos.map(&:github_id)).to include(repo_github_id)
+          expect(owner.repos.map(&:github_id)).to eq([repo_github_id])
         end
       end
     end
@@ -148,7 +148,7 @@ describe RepoSynchronization do
         }
       }
       resource = double(:resource, to_hash: attributes)
-      api = double(:github_api, repos: [resource])
+      api = double("GithubApi", repos: [resource])
       allow(GithubApi).to receive(:new).and_return(api)
     end
   end
