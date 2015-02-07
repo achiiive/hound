@@ -1,8 +1,4 @@
 require "spec_helper"
-require "app/jobs/buildable"
-require "app/models/owner"
-require "app/models/payload"
-require "app/services/build_runner"
 
 describe Buildable do
   class TestJob
