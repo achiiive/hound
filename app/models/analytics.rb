@@ -42,7 +42,8 @@ class Analytics
     track(
       event: "Build Started",
       properties: {
-        name: repo.full_github_name
+        name: repo.full_github_name,
+        private: repo.private,
       }
     )
   end
@@ -51,7 +52,8 @@ class Analytics
     track(
       event: "Build Completed",
       properties: {
-        name: repo.full_github_name
+        name: repo.full_github_name,
+        private: repo.private,
       }
     )
   end

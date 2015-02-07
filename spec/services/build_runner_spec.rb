@@ -137,9 +137,9 @@ describe BuildRunner, '#run' do
     end
   end
 
-  context "with subscribed repo and opened pull request" do
+  context "with subscribed private repo and opened pull request" do
     it "tracks build events" do
-      repo = create(:repo, :active, github_id: 123)
+      repo = create(:repo, :active, github_id: 123, private: true)
       create(:subscription, repo: repo)
       payload = stubbed_payload(
         github_repo_id: repo.github_id,
@@ -155,10 +155,10 @@ describe BuildRunner, '#run' do
 
       expect(analytics).to have_tracked("Build Started").
         for_user(repo.subscription.user).
-        with(properties: { name: repo.full_github_name })
+        with(properties: { name: repo.full_github_name, private: true })
       expect(analytics).to have_tracked("Build Completed").
         for_user(repo.subscription.user).
-        with(properties: { name: repo.full_github_name })
+        with(properties: { name: repo.full_github_name, private: true })
     end
   end
 
