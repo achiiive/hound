@@ -21,7 +21,7 @@ class PullRequest
     )
   end
 
-  def repository_owner
+  def repository_owner_login
     payload.repository_owner_login
   end
 

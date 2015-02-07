@@ -73,7 +73,7 @@ describe StyleGuide::JavaScript do
         file = double(:file, content: "$(myGlobal).hide();").as_null_object
         repo_config = double("RepoConfig", for: {})
 
-        violations_in(file, repo_config, repository_owner: "not_thoughtbot")
+        violations_in(file, repo_config, repository_owner_login: "not_thoughtbot")
 
         expect(File).to have_received(:read).with(configuration_file_path)
         expect(Jshintrb).to have_received(:lint).
@@ -91,7 +91,7 @@ describe StyleGuide::JavaScript do
         )
         repo_config = double("RepoConfig", for: {})
 
-        violations_in(file, repo_config, repository_owner: "thoughtbot")
+        violations_in(file, repo_config, repository_owner_login: "thoughtbot")
 
         expect(File).to have_received(:read).with(configuration_file_path)
         expect(Jshintrb).to have_received(:lint).
@@ -140,8 +140,8 @@ describe StyleGuide::JavaScript do
     end
   end
 
-  def violations_in(file, repo_config, repository_owner: "not_thoughtbot")
-    style_guide = StyleGuide::JavaScript.new(repo_config, repository_owner)
+  def violations_in(file, repo_config, repository_owner_login: "not_thoughtbot")
+    style_guide = StyleGuide::JavaScript.new(repo_config, repository_owner_login)
     style_guide.violations_in_file(file)
   end
 
